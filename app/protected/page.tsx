@@ -1,18 +1,31 @@
-import DeployButton from "@/components/DeployButton";
-import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
-import Header from "@/components/Header";
 import { redirect } from "next/navigation";
-import { useRouter } from 'next/router'
+import SubmitButton from "@/components/messageForm/SubmitButton";
 
+
+const pushUserNameToDatabase = async (user_id: string, user_name: FormData) => {
+  'use server'
+  const supabase = createClient();
+  console.log(user_id, user_name.get('username'))
+  const { data, error } = await supabase
+    .from("Usernames")
+    .insert([
+      { id: user_id, user_name: user_name.get('username') }
+    ]
+    );
+
+  if (error) {
+    console.log(error);
+  } else {
+    return redirect('/protected/' + user_name);
+  }
+
+}
 
 export default async function ProtectedPage() {
+  'use client'
+
   const supabase = createClient();
-  const router = useRouter();
-
-
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -21,11 +34,19 @@ export default async function ProtectedPage() {
     return redirect("/login");
   }
 
+
+  const _pushUserNameToDatabase = pushUserNameToDatabase.bind(null, user.id);
+
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <h1>
-        Hello {router.query.user_id}
+        Hello, Please Select a username
       </h1>
+      <form action={_pushUserNameToDatabase}
+        className="flex flex-col">
+        <input className="text-stone-950 p-2 border border-foreground/10" name="username" type="text" placeholder="username" />
+        <SubmitButton />
+      </form>
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
         <p>
           Powered by{" "}

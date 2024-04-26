@@ -22,14 +22,22 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     const user_id = await supabase.auth.getUser().then(
         (user) => user.data.user?.id
     );
-    console.log(user_id)
-    if (user_id !== params.user_id) {
+
+    const user_name = await supabase
+        .from('Usernames')
+        .select('user_name')
+        .eq('id', user_id).then(data => {
+            if (data && data.data)
+                return data.data[0].user_name
+        });
+
+    if (user_name !== params.user_id) {
         return <div>Not your page</div>
     }
 
-    const messages = await fetchMessageForUser(user_id);
+    const messages = await fetchMessageForUser(user_name);
 
-    console.log(messages)
+    console.log(messages.data)
 
     return (
         <div className="flex-1 w-full flex flex-col gap-20 items-center">
@@ -41,6 +49,11 @@ export default async function Page({ params }: { params: { user_id: string } }) 
                     </div>
                 </nav>
                 <h1>User {params.user_id}</h1>
+                {
+                    messages.data.map(message => (
+                        <div>{message.messages}</div>
+                    ))
+                }
             </div>
         </div>
     )

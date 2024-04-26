@@ -28,7 +28,6 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     const _pushDataToMessagesTable = pushDataToMessagesTable.bind(null, user_id);
 
     return <div className="flex-1 w-full flex flex-col gap-20 items-center justify-center ">
-        {/* Create a textbox  */}
         <h1 className="text-4xl font-bold text-center">Leave a message for {user_id}</h1>
         <form action={_pushDataToMessagesTable} className="max-w-3xl bg-white rounded-lg border p-2 mx-auto mt-10">
             <div className="px-3 mb-2 mt-2">
