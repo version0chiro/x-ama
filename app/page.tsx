@@ -1,14 +1,19 @@
 import DeployButton from "../components/DeployButton";
 import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
-import Header from "@/components/Header";
+import { InputBox } from "@/components/common/InputBox";
+import { SubmitButton } from "@/components/common/Button";
+import { redirect } from 'next/navigation'
+
+const navigateToUsernamePage = async (formData: FormData) => {
+  'use server'
+
+  redirect(`/message/${formData.get('username')}`)
+}
 
 export default async function Index() {
+
   const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
     try {
       createClient();
       return true;
@@ -30,8 +35,10 @@ export default async function Index() {
 
       <div>
         Welcome To X-AMA, please enter the username you would like to drop a message for!
-
-        
+        <form action={navigateToUsernamePage}>
+          <InputBox name="username" />
+          <SubmitButton text="Submit" />
+        </form>
       </div>
 
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
