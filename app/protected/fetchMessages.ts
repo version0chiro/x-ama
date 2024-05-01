@@ -23,6 +23,9 @@ export const fetchMessageForUserWithAnswers = async (user_id: string) => {
     if (error) {
         console.log(error);
     }
+
+    console.log(data)
+
     return data;
 }
 
