@@ -3,6 +3,7 @@ import DeployButton from "@/components/DeployButton";
 import AuthButton from "@/components/AuthButton";
 import { fetchMessageForUserWithAnswers, fetchMessageForUserWithoutAnswer, pushAnswersForMessage } from "../fetchMessages";
 import SubmitButton from "@/components/answerForm/answerButton";
+import { InputBox } from "@/components/common/InputBox";
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
@@ -61,9 +62,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
                                         Enter Your reponse
                                     </text>
                                     <input type="hidden" name="id" value={message.id.toString()} />
-                                    <input type="text" className="text-black" name="answer">
-
-                                    </input>
+                                    <InputBox name="answer" placeholder="Type your answer here" />
                                     <SubmitButton />
                                 </form>
                                 <button className="bg-blue-300 rounded-lg mt-3">Share on X!</button>
@@ -85,6 +84,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
                                         Your reponse
                                     </text>
                                     <input type="hidden" name="id" value={message.id.toString()} />
+
                                     <input type="text" className="text-black" name="answer" defaultValue={message.Answers[0].answer}>
                                     </input>
                                     <SubmitButton />

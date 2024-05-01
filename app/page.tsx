@@ -3,7 +3,9 @@ import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 import { InputBox } from "@/components/common/InputBox";
 import { SubmitButton } from "@/components/common/Button";
+import { ErrorMessage } from "@/components/common/ErrorMessage";
 import { redirect } from 'next/navigation'
+
 
 const navigateToUsernamePage = async (formData: FormData) => {
   'use server'
@@ -11,7 +13,9 @@ const navigateToUsernamePage = async (formData: FormData) => {
   redirect(`/message/${formData.get('username')}`)
 }
 
-export default async function Index() {
+
+
+export default async function Index(params: { invalidUsername: boolean }) {
 
   const canInitSupabaseClient = () => {
     try {
@@ -32,11 +36,14 @@ export default async function Index() {
           {isSupabaseConnected && <AuthButton />}
         </div>
       </nav>
-
+      {
+        params.invalidUsername &&
+        <ErrorMessage errorTitle="Invalid UserName" errorDiscription="The username you entered is not present in our system, try to use a different username" />
+      }
       <div>
         Welcome To X-AMA, please enter the username you would like to drop a message for!
         <form action={navigateToUsernamePage}>
-          <InputBox name="username" />
+          <InputBox name="username" placeholder="Enter UserName" />
           <SubmitButton text="Submit" />
         </form>
       </div>

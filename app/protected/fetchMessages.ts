@@ -5,7 +5,7 @@ export const fetchMessageForUserWithoutAnswer = async (user_id: string) => {
 
     const { data, error } = await supabase.from("UnansweredQuestions").select(`
         id,messages,user_id
-    `).eq("user_id", user_id);
+    `).eq("user_id", user_id).order("TimeStamp", { ascending: false });
 
     if (error) {
         console.log(error);
@@ -18,7 +18,7 @@ export const fetchMessageForUserWithAnswers = async (user_id: string) => {
     const supabase = createClient();
 
     const { data, error } = await supabase.from("Messages").select(`*,Answers!inner(answer)`)
-        .eq("user_id", user_id);
+        .eq("user_id", user_id).order("TimeStamp", { ascending: false });
 
     if (error) {
         console.log(error);
