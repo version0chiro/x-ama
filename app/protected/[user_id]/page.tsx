@@ -85,7 +85,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
                                         Your reponse
                                     </text>
                                     <input type="hidden" name="id" value={message.id.toString()} />
-                                    <input type="text" className="text-black" name="answer" value={message.Answers[0].answer}>
+                                    <input type="text" className="text-black" name="answer" defaultValue={message.Answers[0].answer}>
                                     </input>
                                     <SubmitButton />
                                 </form>

@@ -30,6 +30,8 @@ export default async function Index() {
 
       <div>
         Welcome To X-AMA, please enter the username you would like to drop a message for!
+
+        
       </div>
 
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
