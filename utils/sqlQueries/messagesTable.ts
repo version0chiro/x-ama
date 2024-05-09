@@ -44,16 +44,12 @@ export const fetchMessageForUserWithAnswers = async (user_id: string) => {
         console.log(error);
     }
 
-    console.log(data)
-
     return data;
 }
 
 export const pushAnswersForMessage = async (formData: FormData) => {
     'use server'
     const supabase = screateServerClient();
-
-    console.log(formData);
 
     const { data, error } = await supabase.from("Answers").insert([
         {

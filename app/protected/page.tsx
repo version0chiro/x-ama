@@ -2,11 +2,9 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import SubmitButton from "@/components/messageForm/SubmitButton";
 
-
 const pushUserNameToDatabase = async (user_id: string, user_name: FormData) => {
   'use server'
   const supabase = createClient();
-  console.log(user_id, user_name.get('username'))
   const { data, error } = await supabase
     .from("Usernames")
     .insert([
@@ -33,7 +31,6 @@ export default async function ProtectedPage() {
   if (!user) {
     return redirect("/login");
   }
-
 
   const _pushUserNameToDatabase = pushUserNameToDatabase.bind(null, user.id);
 
