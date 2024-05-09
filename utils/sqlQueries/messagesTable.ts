@@ -1,7 +1,27 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/client";
+import { createClient as screateServerClient} from "@/utils/supabase/server";
+import { randomInt } from "crypto";
+import { redirect } from "next/navigation";
+
+export const pushDataToMessagesTable = async (user_id: string, formData: FormData) => {
+    'use server'
+
+    const supabase = createClient();
+
+    const id = new Date().getTime() + randomInt(500);
+
+    const { data, error } = await supabase.from('Messages').insert({
+        id,
+        messages: formData.get('comment'),
+        user_id: user_id
+
+    })
+    if (error) console.log(error)
+    else redirect('/submitted')
+}
 
 export const fetchMessageForUserWithoutAnswer = async (user_id: string) => {
-    const supabase = createClient();
+    const supabase = screateServerClient();
 
     const { data, error } = await supabase.from("UnansweredQuestions").select(`
         id,messages,user_id
@@ -15,7 +35,7 @@ export const fetchMessageForUserWithoutAnswer = async (user_id: string) => {
 }
 
 export const fetchMessageForUserWithAnswers = async (user_id: string) => {
-    const supabase = createClient();
+    const supabase = screateServerClient();
 
     const { data, error } = await supabase.from("Messages").select(`*,Answers!inner(answer)`)
         .eq("user_id", user_id).order("TimeStamp", { ascending: false });
@@ -31,7 +51,7 @@ export const fetchMessageForUserWithAnswers = async (user_id: string) => {
 
 export const pushAnswersForMessage = async (formData: FormData) => {
     'use server'
-    const supabase = createClient();
+    const supabase = screateServerClient();
 
     console.log(formData);
 

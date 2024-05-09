@@ -1,10 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import DeployButton from "@/components/DeployButton";
 import AuthButton from "@/components/AuthButton";
-import { fetchMessageForUserWithAnswers, fetchMessageForUserWithoutAnswer, pushAnswersForMessage } from "../fetchMessages";
 import SubmitButton from "@/components/answerForm/answerButton";
 import { InputBox } from "@/components/common/InputBox";
-
+import { fetchMessageForUserWithAnswers, fetchMessageForUserWithoutAnswer, pushAnswersForMessage } from "@/utils/sqlQueries/messagesTable";
 
 export default async function Page({ params }: { params: { user_id: string } }) {
     const canInitSupabaseClient = () => {
