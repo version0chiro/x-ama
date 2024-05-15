@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import SubmitButton from "@/components/messageForm/SubmitButton";
+import { SubmitButton } from "@/components/common/Button";
 
 const pushUserNameToDatabase = async (user_id: string, user_name: FormData) => {
   'use server'
@@ -14,6 +14,7 @@ const pushUserNameToDatabase = async (user_id: string, user_name: FormData) => {
 
   if (error) {
     console.log(error);
+    throw new Error(error.message)
   } else {
     return redirect('/protected/' + user_name);
   }
@@ -39,10 +40,11 @@ export default async function ProtectedPage() {
       <h1>
         Hello, Please Select a username
       </h1>
+      <h3>Username already taken!</h3>
       <form action={_pushUserNameToDatabase}
         className="flex flex-col">
         <input className="text-stone-950 p-2 border border-foreground/10" name="username" type="text" placeholder="username" />
-        <SubmitButton />
+        <SubmitButton text="Choose your username!" />
       </form>
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
         <p>
