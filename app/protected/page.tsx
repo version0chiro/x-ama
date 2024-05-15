@@ -16,9 +16,8 @@ const pushUserNameToDatabase = async (user_id: string, user_name: FormData) => {
     console.log(error);
     throw new Error(error.message)
   } else {
-    return redirect('/protected/' + user_name);
+    return redirect('/protected/' + user_name.get('username'));
   }
-
 }
 
 export default async function ProtectedPage() {
