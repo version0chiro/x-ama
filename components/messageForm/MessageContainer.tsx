@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import SubmitButton from "./SubmitButton"
 
 export default function MessageContainer(props: { formAction: any, message: string, messageId: string, answer?: string }) {
+    console.log(props.answer)
     return (
         <Card className="w-[350px] mb-4">
             <CardHeader>
