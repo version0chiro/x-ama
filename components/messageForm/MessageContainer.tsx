@@ -14,14 +14,13 @@ import { Label } from "@/components/ui/label"
 import SubmitButton from "./SubmitButton"
 
 export default function MessageContainer(props: { formAction: any, message: string, messageId: string, answer?: string }) {
-    console.log(props.answer)
     return (
-        <Card className="w-[350px] mb-4">
+        <Card className="w-[350px] mb-4 h-full flex-1 ">
             <CardHeader>
                 <CardTitle>Question</CardTitle>
                 <CardDescription>{props.message}</CardDescription>
             </CardHeader>
-            <form action={props.formAction}>
+            <form action={props.formAction} className="h-full items-stretch flex flex-col">
                 <CardContent>
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
@@ -38,7 +37,7 @@ export default function MessageContainer(props: { formAction: any, message: stri
                         </div>
                     </div>
                 </CardContent>
-                <CardFooter className="flex justify-between">
+                <CardFooter className="flex justify-between items-end">
                     <Button>Share</Button>
                     <SubmitButton />
                 </CardFooter>

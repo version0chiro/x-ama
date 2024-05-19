@@ -75,7 +75,6 @@ export const pushAnswersForMessage = async (formData: FormData) => {
 export const updateExistingAnswer = async (formData: FormData) => {
     'use server'
     const supabase = screateServerClient();
-    console.log(formData.get('id'), formData.get('answer'))
 
     const { error } = await supabase.from("Answers").update({
         answer: formData.get('answer')

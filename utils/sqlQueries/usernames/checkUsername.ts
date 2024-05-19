@@ -51,3 +51,21 @@ export const pushUserNameToDatabase = async (user_id: string, user_name: FormDat
     return redirect('/protected/' + user_name.get('username'));
   }
 }
+
+export const getUserNameFromID = async (user_id: string) => {
+  'use server'
+
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from('Usernames')
+    .select('user_name')
+    .eq('id', user_id)
+
+  if (!data) {
+    redirect('/protected')
+  }
+
+  if (error) console.log(error)
+
+  return data[0].user_name;
+}
