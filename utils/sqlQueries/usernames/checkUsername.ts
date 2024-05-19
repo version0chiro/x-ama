@@ -29,7 +29,7 @@ export const checkIfExisting = async (user_id: string) => {
     .select("*")
     .eq("id", user_id);
 
-  if (data) {
+  if (data && data.length > 0 && data[0].user_name) {
     return redirect('/protected/' + data[0].user_name);
   }
 }
