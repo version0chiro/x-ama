@@ -1,7 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
-import SubmitButton from "@/components/answerForm/answerButton";
-import { InputBox } from "@/components/common/InputBox";
-import { fetchMessageForUserWithAnswers, fetchMessageForUserWithoutAnswer, pushAnswersForMessage } from "@/utils/sqlQueries/messagesTable";
+import { fetchMessageForUserWithAnswers, fetchMessageForUserWithoutAnswer, pushAnswersForMessage, updateExistingAnswer } from "@/utils/sqlQueries/messagesTable";
 import NavBar from "@/components/common/NavBar";
 import MessageContainer from "@/components/messageForm/MessageContainer";
 
@@ -51,7 +49,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
                         answered_messages && answered_messages.map(message => (
                             <div className="flex flex-col justify-center" key={message.id.toString()}>
                                 <div className="flex flex-col justify-center" key={message.id.toString()}>
-                                    <MessageContainer formAction={pushAnswersForMessage} message={message.messages} messageId={message.id} answer={message.Answers.answer} />
+                                    <MessageContainer formAction={updateExistingAnswer} message={message.messages} messageId={message.id} answer={message.Answers.answer} />
                                 </div>
                             </div>
                         ))

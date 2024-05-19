@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/client";
-import { createClient as screateServerClient} from "@/utils/supabase/server";
+import { createClient as screateServerClient } from "@/utils/supabase/server";
 import { randomInt } from "crypto";
 import { redirect } from "next/navigation";
 
@@ -64,4 +64,31 @@ export const pushAnswersForMessage = async (formData: FormData) => {
     }
 
     return data;
+}
+
+export const updateExistingAnswer = async (formData: FormData) => {
+    'use server'
+    const supabase = screateServerClient();
+    console.log(formData.get('id'), formData.get('answer'))
+
+    const { error } = await supabase.from("Answers").update({
+        answer: formData.get('answer')
+    }).eq("question_id", formData.get('id'));
+
+    if (error) {
+        console.log(error);
+    }
+
+}
+
+export const deleteAnswer = async (id: string) => {
+    'use server'
+    const supabase = screateServerClient();
+
+    const { error } = await supabase.from("Answers").delete().eq("question_id", id);
+
+    if (error) {
+        console.log(error);
+    }
+
 }

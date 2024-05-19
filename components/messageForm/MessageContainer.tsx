@@ -20,26 +20,28 @@ export default function MessageContainer(props: { formAction: any, message: stri
                 <CardTitle>Question</CardTitle>
                 <CardDescription>{props.message}</CardDescription>
             </CardHeader>
-            <CardContent>
-                <form action={props.formAction}>
+            <form action={props.formAction}>
+                <CardContent>
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
                             <Label htmlFor="name">Answer</Label>
-
-                            <Input id="name" placeholder="Enter your response"
-                                value={
-                                    props.answer ?? props.answer
+                            <Input name="id" defaultValue={props.messageId} className="hidden" />
+                            <Input name="answer" placeholder="Enter your response"
+                                defaultValue={props.answer}
+                                onChange={
+                                    (e) => {
+                                        props.answer = e.target.value
+                                    }
                                 }
                             />
                         </div>
-
                     </div>
-                </form>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-                <Button>Share</Button>
-                <SubmitButton />
-            </CardFooter>
-        </Card>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                    <Button>Share</Button>
+                    <SubmitButton />
+                </CardFooter>
+            </form>
+        </Card >
     )
 }
