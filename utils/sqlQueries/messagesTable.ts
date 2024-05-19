@@ -47,7 +47,7 @@ export const fetchMessageForUserWithAnswers = async (user_id: string) => {
         .eq("user_id", user_id).order("TimeStamp", { ascending: false });
 
     if (error) {
-        console.log(error);
+        console.error(error);
     }
 
     return data;
