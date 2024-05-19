@@ -10,7 +10,7 @@ export const pushDataToMessagesTable = async (user_id: string, formData: FormDat
 
     const message = formData.get('comment');
 
-    if (!message || message.toString.length === 0) {
+    if (!message || message.toString().length === 0) {
         throw new Error('Empty message')
     }
 
