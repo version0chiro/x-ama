@@ -8,6 +8,12 @@ export const pushDataToMessagesTable = async (user_id: string, formData: FormDat
 
     const supabase = createClient();
 
+    const message = formData.get('comment');
+
+    if (!message || message.toString.length === 0) {
+        throw new Error('Empty message')
+    }
+
     const id = new Date().getTime() + randomInt(500);
 
     const { data, error } = await supabase.from('Messages').insert({
