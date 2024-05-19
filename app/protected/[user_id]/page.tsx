@@ -47,7 +47,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
                         {
                             answered_messages && answered_messages.map(message => (
                                 <div className="flex flex-col" key={message.id.toString()}>
-                                    <MessageContainer formAction={updateExistingAnswer} message={message.messages} messageId={message.id} answer={message.Answers.answer} />
+                                    <MessageContainer formAction={updateExistingAnswer} message={message.messages} messageId={message.id} answer={message.Answers[0].answer} />
                                 </div>
                             ))
                         }
