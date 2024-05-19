@@ -2,8 +2,8 @@ import { InputBox } from "@/components/common/InputBox";
 import { SubmitButton } from "@/components/common/Button";
 import NavBar from "@/components/common/NavBar";
 import Footer from "@/components/common/Footer";
-import { checkUserName } from "@/utils/sqlQueries/checkUsername";
 import { pushDataToMessagesTable } from "@/utils/sqlQueries/messagesTable";
+import { checkUserName } from "@/utils/sqlQueries/usernames";
 
 export default async function Page({ params }: { params: { user_id: string } }) {
     'use client'

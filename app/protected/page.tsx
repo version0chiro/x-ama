@@ -1,24 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "@/components/common/Button";
-
-const pushUserNameToDatabase = async (user_id: string, user_name: FormData) => {
-  'use server'
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("Usernames")
-    .insert([
-      { id: user_id, user_name: user_name.get('username') }
-    ]
-    );
-
-  if (error) {
-    console.log(error);
-    throw new Error(error.message)
-  } else {
-    return redirect('/protected/' + user_name.get('username'));
-  }
-}
+import { checkIfExisting, pushUserNameToDatabase } from "@/utils/sqlQueries/usernames";
 
 export default async function ProtectedPage() {
   'use client'
@@ -31,7 +14,7 @@ export default async function ProtectedPage() {
   if (!user) {
     return redirect("/login");
   }
-
+  await checkIfExisting(user.id)
   const _pushUserNameToDatabase = pushUserNameToDatabase.bind(null, user.id);
 
   return (
@@ -39,7 +22,6 @@ export default async function ProtectedPage() {
       <h1>
         Hello, Please Select a username
       </h1>
-      <h3>Username already taken!</h3>
       <form action={_pushUserNameToDatabase}
         className="flex flex-col">
         <input className="text-stone-950 p-2 border border-foreground/10" name="username" type="text" placeholder="username" />

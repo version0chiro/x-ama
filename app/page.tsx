@@ -1,9 +1,8 @@
 import { InputBox } from "@/components/common/InputBox";
 import { SubmitButton } from "@/components/common/Button";
-import { ErrorMessage } from "@/components/common/ErrorMessage";
 import NavBar from "@/components/common/NavBar";
 import Footer from "@/components/common/Footer";
-import { navigateToUsernamePage } from "@/utils/sqlQueries/checkUsername";
+import { navigateToUsernamePage } from "@/utils/sqlQueries/usernames";
 
 export default async function Index() {
 
