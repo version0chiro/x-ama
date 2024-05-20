@@ -1,6 +1,7 @@
-import { createClient } from "@/utils/supabase/server";
-import Link from "next/link";
 import { redirect } from "next/navigation";
+
+import LoginWithXButton from "./auth/LoginWithXButton";
+import { createClient } from "@/utils/supabase/client";
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -8,6 +9,11 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const x = await supabase.auth.getUser();
+
+  console.log(x);
+  console.log(user)
 
   const signOut = async () => {
     "use server";
@@ -27,11 +33,6 @@ export default async function AuthButton() {
       </form>
     </div>
   ) : (
-    <Link
-      href="/login"
-      className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-    >
-      Login
-    </Link>
+    <LoginWithXButton />
   );
 }
