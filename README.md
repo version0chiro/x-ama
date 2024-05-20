@@ -55,7 +55,7 @@ npm run dev
 - [NextJs](https://nextjs.org) - Next.js is an open-source web development framework.
 - [TailwindCSS](https://tailwindcss.com) - Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
 - [shadcn/ui](https://ui.shadcn.com/) - Beautifully designed components that you can copy and paste into your apps
-- [JavaScript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+- [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 
 > Backend
 
