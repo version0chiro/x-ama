@@ -24,7 +24,6 @@ export const checkIfExisting = async (user_id: string) => {
   'use server'
 
   const supabse = createClient();
-  console.log(user_id)
   const { data, error } = await supabse.from("Usernames")
     .select("*")
     .eq("id", user_id);

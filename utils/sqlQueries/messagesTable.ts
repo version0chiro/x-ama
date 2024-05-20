@@ -14,6 +14,12 @@ export const pushDataToMessagesTable = async (user_id: string, formData: FormDat
         throw new Error('Empty message')
     }
 
+    if (
+        message.toString().length < 10
+    ) throw new Error(
+        'Message is too short'
+    )
+
     const id = new Date().getTime() + randomInt(500);
 
     const { data, error } = await supabase.from('Messages').insert({
