@@ -1,18 +1,28 @@
-A simple website for you to get anonymous message and share them on your X profile
+A simple website for you to get anonymous message and share them on your 𝕏 profile
 
 
-Work in progress....
+Work in progress.... ⏳
 
-How to setup up locally:
+## Getting Started: Running the Project Locally
 
-prerequisites:
-- Docker
-- Supabase CLI
-- NPX
+## 💻 Prerequisites:
 
-Steps:
+- [Docker](https://docs.docker.com/desktop/) - Docker helps developers build, share, run, and verify applications anywhere, without tedious environment configuration or management.
+- [Supabase CLI](https://supabase.com/docs/guides/cli) - JYou can use the Supabase CLI to run the entire Supabase stack locally on your machine
+- [NPX](https://docs.npmjs.com/cli/v10/commands/npx) - This command allows you to run an arbitrary command from an npm package
+
+## 🏃 Steps:
+
+**run the development server:**
+
 - Spin up your docker desktop or cli
-- run `supabase init` in the x-ama file
+
+```
+ cd x-ama
+```
+```
+supabase start
+```
  - Terminal Output should look something like this 
  ```
   API URL: http://127.0.0.1:54321
@@ -30,11 +40,23 @@ service_role key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZ
  ```
 
 - copy the `API URL` & `anon key` from the terminal output
-- pase in the `.env.example` file and rename it to `.env.local`
-- run `npm run dev` in the x-ama file
+- paste in the `.env.example` file and rename it to `.env.local`
 - supabase instance will be running on `http://127.0.0.1:54323/`
+```
+npm run dev
+```
 - Next app will run on local host: 3000
 
 
+## 💻 Tech Stack
 
-Stack: Next.js, Tailwind and Supabase
+> Frontend
+
+- [NextJs](https://nextjs.org) - Next.js is an open-source web development framework.
+- [TailwindCSS](https://tailwindcss.com) - Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
+- [shadcn/ui](https://ui.shadcn.com/) - Beautifully designed components that you can copy and paste into your apps
+- [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+
+> Backend
+
+- [Supabase](https://supabase.com/) - Supabase is an open source Firebase alternative.
