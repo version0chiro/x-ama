@@ -1,14 +1,16 @@
-"use client"
+'use client'
 import { signInWithTwitter } from "@/utils/auth/loginWithX";
-import { Button } from "../ui/button";
 
 export default function LoginWithXButton() {
+    const handleLogin = () => {
+        signInWithTwitter();
+    }
     return (
-        <Button
+        <button
             className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-            onClick={signInWithTwitter}
+            onClick={handleLogin}
         >
             Login with X
-        </Button>
+        </button>
     )
 }

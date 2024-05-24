@@ -1,6 +1,6 @@
 # A string used to distinguish different Supabase projects on the same host. Defaults to the
 # working directory name when running `supabase init`.
-project_id = "x-ama-supabase"
+project_id = "supabase"
 
 [api]
 enabled = true
@@ -156,12 +156,6 @@ port = 54327
 vector_port = 54328
 # Configure one of the supported backends: `postgres`, `bigquery`.
 backend = "postgres"
-
-[auth.external.twitter]
-enabled = true
-client_id = "env(TWITTER_API_KEY)"
-secret = "env(TWITTER_API_SECRET)"
-redirect_uri = "https://zkpqtmefsjodkzplsnhr.supabase.co/auth/v1/callback"
 
 # Experimental features may be deprecated any time
 [experimental]
