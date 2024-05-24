@@ -18,5 +18,5 @@ export async function GET(request: NextRequest) {
 
   }
 
-  return NextResponse.redirect(requestUrl.origin);
+  return NextResponse.redirect('https://ask-me-anything-x.vercel.app/');
 }
