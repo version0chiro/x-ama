@@ -6,7 +6,7 @@ export async function signInWithTwitter() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'twitter',
         options: {
-            redirectTo: `http://localhost:3000/auth/callback`, // Update with your production URL when deploying
+            redirectTo: `/auth/callback`, // Update with your production URL when deploying
         },
     });
 
