@@ -2,10 +2,12 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "@/components/common/Button";
 import { checkIfExisting, pushUserNameToDatabase } from "@/utils/sqlQueries/usernames";
+import { getXUsername } from "@/utils/auth/getXUsername";
 
 export default async function ProtectedPage() {
   'use client'
 
+  const x_username = await getXUsername()
   const supabase = createClient();
   const {
     data: { user },
