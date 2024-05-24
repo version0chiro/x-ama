@@ -8,7 +8,6 @@ export default async function AuthButtonServer() {
     const {
         data: { user },
     } = await supabase.auth.getUser();
-    console.log(user?.user_metadata.user_name)
 
     return <AuthButtonClient user={user} />;
 }

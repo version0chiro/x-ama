@@ -28,7 +28,9 @@ export const pushDataToMessagesTable = async (user_id: string, formData: FormDat
         user_id: user_id
 
     })
-    if (error) console.log(error)
+    if (error) {
+        throw new Error(error.message)
+    }
     else redirect('/submitted')
 }
 
@@ -40,7 +42,7 @@ export const fetchMessageForUserWithoutAnswer = async (user_id: string) => {
     `).eq("user_id", user_id).order("TimeStamp", { ascending: false });
 
     if (error) {
-        console.log(error);
+        throw new Error(error.message)
     }
 
     return data;
@@ -71,7 +73,7 @@ export const pushAnswersForMessage = async (formData: FormData) => {
     ]);
 
     if (error) {
-        console.log(error);
+        throw new Error(error.message)
 
     }
 
@@ -87,7 +89,7 @@ export const updateExistingAnswer = async (formData: FormData) => {
     }).eq("question_id", formData.get('id'));
 
     if (error) {
-        console.log(error);
+        throw new Error(error.message)
     }
 
 }
@@ -99,7 +101,7 @@ export const deleteAnswer = async (id: string) => {
     const { error } = await supabase.from("Answers").delete().eq("question_id", id);
 
     if (error) {
-        console.log(error);
+        throw new Error(error.message)
     }
 
 }

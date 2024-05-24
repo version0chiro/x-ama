@@ -7,8 +7,6 @@ export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
 
-  console.log("Auth code:", code);
-
   if (code) {
     const supabase = createRouteHandlerClient({ cookies });
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
@@ -18,10 +16,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(`${requestUrl.origin}/auth/error`);
     }
 
-    console.log("Session data:", data);
   }
-  // check session
-
 
   return NextResponse.redirect(requestUrl.origin);
 }
