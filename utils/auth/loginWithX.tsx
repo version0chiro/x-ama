@@ -6,7 +6,7 @@ export async function signInWithTwitter() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'twitter',
         options: {
-            redirectTo: `/auth/callback`, // Update with your production URL when deploying
+            redirectTo: `https://ask-me-anything-x.vercel.app/auth/callback`, // Update with your production URL when deploying
         },
     });
 
