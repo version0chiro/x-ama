@@ -16,7 +16,7 @@ jobs:
         pr-message: "Message that will be displayed on users' first pull request"
 
     - name: Greet user on every pull request
-      if: github.event_name == 'pull_request'
+      if: github.event_name == "pull_request"
       uses: actions/github-script@v4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
