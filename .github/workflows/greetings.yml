@@ -14,3 +14,25 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: "Message that will be displayed on users' first issue"
         pr-message: "Message that will be displayed on users' first pull request"
+
+    - name: Greet user on every pull request
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const comment = `
+            Hello @${github.context.payload.pull_request.user.login}!
+
+            Thank you for opening a pull request. We appreciate your contribution.
+
+            Please make sure to follow our contribution guidelines and address any feedback that we provide.
+
+            Thanks again!
+          `
+          github.rest.issues.createComment({
+            issue_number: github.context.payload.pull_request.number,
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            body: comment
+          })
