@@ -16,7 +16,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const comment = `
-          Hello @${github.event.pull_request.user.login}!}!
+          Hello !
 
             Thank you for opening a pull request. We appreciate your contribution.
 
