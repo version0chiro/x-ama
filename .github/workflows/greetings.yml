@@ -22,7 +22,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const comment = `
-            Hello @${github.context.payload.pull_request.user.login}!
+          Hello @${github.event.pull_request.user.login}!}!
 
             Thank you for opening a pull request. We appreciate your contribution.
 
@@ -31,7 +31,7 @@ jobs:
             Thanks again!
           `
           github.rest.issues.createComment({
-            issue_number: github.context.payload.pull_request.number,
+            issue_number: github.event.pull_request.number,
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             body: comment
