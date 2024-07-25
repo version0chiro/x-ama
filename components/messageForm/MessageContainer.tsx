@@ -1,4 +1,3 @@
-"use client"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -10,8 +9,8 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import SubmitButton from "./SubmitButton"
+import { InputBox } from "./InputBox"
 
 export default function MessageContainer(props: { formAction: any, message: string, messageId: string, answer?: string }) {
     return (
@@ -24,21 +23,12 @@ export default function MessageContainer(props: { formAction: any, message: stri
                 <CardContent>
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="name">Answer</Label>
                             <Input name="id" defaultValue={props.messageId} className="hidden" />
-                            <Input name="answer" placeholder="Enter your response"
-                                defaultValue={props.answer}
-                                onChange={
-                                    (e) => {
-                                        props.answer = e.target.value
-                                    }
-                                }
-                            />
+                            <InputBox answer={props.answer ?? ""} />
                         </div>
                     </div>
                 </CardContent>
                 <CardFooter className="flex justify-between items-end">
-                    <Button>Share</Button>
                     <SubmitButton />
                 </CardFooter>
             </form>

@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/client";
 import { createClient as screateServerClient } from "@/utils/supabase/server";
 import { randomInt } from "crypto";
 import { redirect } from "next/navigation";
+import { FormEvent } from "react";
 
 export const pushDataToMessagesTable = async (user_id: string, formData: FormData) => {
     'use server'
@@ -64,9 +65,11 @@ export const fetchMessageForUserWithAnswers = async (user_id: string, page_no: n
     return data;
 }
 
-export const pushAnswersForMessage = async (formData: FormData) => {
+export const pushAnswersForMessage = async (event: FormEvent<HTMLFormElement>) => {
     'use server'
+    event.preventDefault();
     const supabase = screateServerClient();
+    const formData = new FormData(event.currentTarget);
 
     const { data, error } = await supabase.from("Answers").insert([
         {
@@ -83,10 +86,11 @@ export const pushAnswersForMessage = async (formData: FormData) => {
     return data;
 }
 
-export const updateExistingAnswer = async (formData: FormData) => {
+export const updateExistingAnswer = async (event: FormEvent<HTMLFormElement>) => {
     'use server'
+    event.preventDefault();
     const supabase = screateServerClient();
-
+    const formData = new FormData(event.currentTarget);
     const { error } = await supabase.from("Answers").update({
         answer: formData.get('answer')
     }).eq("question_id", formData.get('id'));
