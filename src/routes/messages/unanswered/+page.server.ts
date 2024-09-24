@@ -26,7 +26,6 @@ export async function load({ cookies }) {
     `).eq("user_id", user_id).order("TimeStamp", { ascending: false })
         .range((page_no - 1) * 10, page_no * 10 - 1);
 
-    console.log(data);
 
     return {
         data,

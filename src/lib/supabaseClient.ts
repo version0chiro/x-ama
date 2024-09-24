@@ -5,7 +5,6 @@ import { env } from '$env/dynamic/private';
 const supabaseUrl = env.PUBLIC_SUPABASE_URL;
 const supabaseKey = env.PUBLIC_SUPABASE_ANON_KEY;
 
-console.log(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
 // Add a check to ensure the values are present or throw error
 
 if (supabaseUrl === undefined || supabaseKey === undefined) {
