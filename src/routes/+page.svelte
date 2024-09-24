@@ -1,6 +1,6 @@
 <div class="container h-full mx-auto flex justify-center items-center">
 	<div class="flex flex-col gap-4 w-full">
-		<a href="/messages">
+		<a href="/messages/unanswered">
 			<div class="card p-4 lg:w-1/2">See your messages</div>
 		</a>
 		<div class="card p-4 lg:w-1/2 flex flex-col gap-4">
