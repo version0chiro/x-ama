@@ -18,12 +18,12 @@
 	}
 </script>
 
-<div class="flex flex-col gap-4 justify-center items-center p-2">
+<div class="flex flex-col w-full  gap-4 justify-center items-center p-2">
 	{#each messages as message, index}
-		<div class="flex flex-col card p-4 w-1/3 gap-2">
+		<div class="flex flex-col card p-4 sm:w-full lg:w-1/3 md:w-1/3 gap-2">
 			{#if $expandedStates[index]}
 				<p>{message.messages}</p>
-				<button class="btn variant-filled w-1/2" on:click={() => toggleExpand(index)}>
+				<button class="btn variant-filled sm:.card md:w-1/2 lg:w-1/2 " on:click={() => toggleExpand(index)}>
 					{$expandedStates[index] ? 'Show Less' : 'Expand More'}
 				</button>
 			{:else}
@@ -38,3 +38,10 @@
 		</div>
 	{/each}
 </div>
+
+
+<style>
+	.card {
+		width: inherit;
+	}
+</style>

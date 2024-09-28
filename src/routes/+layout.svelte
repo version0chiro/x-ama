@@ -66,7 +66,8 @@
 					</form>
 				{/if}
 				{#if session}
-					<p>Signed in as {session.user.user_metadata.user_name}</p>
+					<p class="hidden md:block lg:block">Signed in as {session.user.user_metadata.user_name}</p>
+					<p class="block md:hidden lg:hidden text-sm">{session.user.user_metadata.user_name}</p>
 					<form method="post" action="/auth/logout">
 						<button type="submit">Sign Out</button>
 					</form>
