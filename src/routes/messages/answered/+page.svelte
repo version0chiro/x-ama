@@ -2,7 +2,6 @@
 	/** @type {import('./$types').PageData} */
 	export let data;
 	const messages = data.data;
-	console.log(messages);
 
 	// Add this line to import the necessary Svelte store
 	import { writable } from 'svelte/store';

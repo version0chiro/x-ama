@@ -18,10 +18,10 @@ export const load: LayoutServerLoad = async ({ locals: { safeGetSession }, cooki
     let unAnsweredCount = 0;
     let answeredCount = 0;
 
-    // if (cookies.get("unAnsweredCount") && cookies.get("answeredCount")) {
-    //     unAnsweredCount = parseInt(cookies.get("unAnsweredCount") || "0")
-    //     answeredCount = parseInt(cookies.get("answeredCount") || "0")
-    // }
+    if (cookies.get("unAnsweredCount") && cookies.get("answeredCount")) {
+        unAnsweredCount = parseInt(cookies.get("unAnsweredCount") || "0")
+        answeredCount = parseInt(cookies.get("answeredCount") || "0")
+    }
      {
         unAnsweredCount = (await supabase.from("UnansweredQuestions").select("id", { count: "exact" })
             .eq("user_id", user_id)).count || 0;

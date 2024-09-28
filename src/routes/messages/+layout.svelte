@@ -2,6 +2,8 @@
 	import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 	import { goto } from '$app/navigation';
 	import { navigating } from '$app/stores';
+	import { Paginator, type PaginationSettings } from '@skeletonlabs/skeleton';
+	import { redirect } from '@sveltejs/kit';
 
 	export let data; // Add this line to receive the data from layout.server.ts
 
@@ -10,13 +12,15 @@
 
 	let tabSet = 0;
 
-	export let isAnswered: boolean;
+	let isAnswered = data.isAnswered;
 
 	if (isAnswered) {
 		tabSet = 1;
 	} else {
 		tabSet = 0;
 	}
+
+	let page_no = data.page_no;
 
 	let isLoading = false;
 
@@ -25,6 +29,24 @@
 			isLoading = true;
 		} else {
 			isLoading = false;
+		}
+	}
+	let maxPage = isAnswered ? Math.ceil(answeredCount) : Math.ceil(unAnsweredCount);
+
+	let paginationSetting: PaginationSettings = {
+		amounts: [10],
+		page: page_no - 1,
+		limit: 10,
+		size: maxPage
+	};
+
+	$: {
+		if (isAnswered) {
+			maxPage = Math.ceil(answeredCount);
+			paginationSetting.size = maxPage;
+		} else {
+			maxPage = Math.ceil(unAnsweredCount);
+			paginationSetting.size = maxPage;
 		}
 	}
 </script>
@@ -37,7 +59,12 @@
 			value={0}
 			on:click={() => {
 				tabSet = 0;
-				goto('/messages/unanswered');
+				if (!isAnswered) {
+					goto(`/messages/unanswered/${page_no}`);
+				} else {
+					goto(`/messages/unanswered/1`);
+				}
+				isAnswered = !isAnswered;
 				isLoading = true;
 			}}
 		>
@@ -50,7 +77,12 @@
 			value={1}
 			on:click={() => {
 				tabSet = 1;
-				goto('/messages/answered');
+				if (isAnswered) {
+					goto(`/messages/answered/${page_no}`);
+				} else {
+					goto(`/messages/answered/1`);
+				}
+				isAnswered = !isAnswered;
 				isLoading = true;
 			}}
 		>
@@ -59,6 +91,8 @@
 		</Tab>
 		<!-- Tab Panels --->
 	</TabGroup>
+
+	<!-- Add Paginator here -->
 
 	{#if isLoading}
 		<div class="flex justify-center items-center">
@@ -83,6 +117,16 @@
 			</div>
 		</div>
 	{:else}
+		<Paginator
+			bind:settings={paginationSetting}
+			showFirstLastButtons={true}
+			showPreviousNextButtons={true}
+			on:page={(e) => {
+				const nextPage = e.detail + 1;
+				goto(`/messages/${isAnswered ? 'answered' : 'unanswered'}/${nextPage}`);
+				isLoading = true;
+			}}
+		/>
 		<slot />
 	{/if}
 </div>

@@ -47,7 +47,9 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">X-AMA</strong>
+				<a href="/">
+					<strong class="text-xl uppercase">X-AMA</strong>
+				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a
