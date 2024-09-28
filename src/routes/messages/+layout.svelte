@@ -3,6 +3,11 @@
 	import { goto } from '$app/navigation';
 	import { navigating } from '$app/stores';
 
+	export let data; // Add this line to receive the data from layout.server.ts
+
+	let unAnsweredCount = data.unAnsweredCount;
+	let answeredCount = data.answeredCount;
+
 	let tabSet = 0;
 
 	export let isAnswered: boolean;
@@ -15,7 +20,6 @@
 
 	let isLoading = false;
 
-	// Subscribe to the navigating store
 	$: {
 		if ($navigating) {
 			isLoading = true;
@@ -38,6 +42,7 @@
 			}}
 		>
 			<span>Unanswered</span>
+			<span class="badge badge-filled bg-red-500 text-white">{unAnsweredCount}</span>
 		</Tab>
 		<Tab
 			bind:group={tabSet}
@@ -50,6 +55,7 @@
 			}}
 		>
 			<span>Answered</span>
+			<span class="badge badge-filled bg-green-500 text-white">{answeredCount}</span>
 		</Tab>
 		<!-- Tab Panels --->
 	</TabGroup>

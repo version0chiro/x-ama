@@ -23,10 +23,7 @@ export async function load({ cookies }) {
 
     const { data, error } = await supabase.from("Messages").select(`*,Answers!inner(answer)`)
         .eq("user_id", user_id).order("TimeStamp", { ascending: false })
-        .range((page_no - 1) * 10, page_no * 10 - 1)
-        ;
-
-
+        .range((page_no - 1) * 10, page_no * 10 - 1);
 
     return {
         data,
