@@ -5,9 +5,6 @@ import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from "$env/static/publi
 export async function handleSignIn(supabase: SupabaseClient) {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'twitter',
-        options: {
-            redirectTo: `https://ask-me-anything-x.vercel.app/auth/callback` // Update with your production URL when deploying
-        }
     });
     if (error) {
         console.error('Error signing in with Twitter:', error.message);
