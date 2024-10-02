@@ -14,6 +14,20 @@ export async function handleSignIn(supabase: SupabaseClient) {
     }
 }
 
+export async function handleSignInWithGoogle(supabase: SupabaseClient) {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+    });
+    if (error) {
+        console.error('Error signing in with Google:', error.message);
+    } else {
+        console.log('Sign-in initiated, redirecting...');
+        return data
+    }
+}
+
+
+
 export async function handleSignOut(supabase: SupabaseClient) {
     const { error } = await supabase.auth.signOut()
 

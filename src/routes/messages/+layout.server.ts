@@ -14,6 +14,7 @@ export const load: LayoutServerLoad = async ({ locals: { safeGetSession }, cooki
             getAll: () => cookies.getAll()
         },
     });
+    
     const user_id = user.user_metadata.user_name;
     let unAnsweredCount = 0;
     let answeredCount = 0;

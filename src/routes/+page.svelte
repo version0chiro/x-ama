@@ -4,7 +4,7 @@
 </script>
 
 <div class="container h-full mx-auto flex justify-center items-center">
-	<div class="flex flex-col gap-4 w-full">
+	<div class="flex flex-col gap-4 w-full pl-5 pr-5">
 		<a href="/messages/unanswered">
 			<div class="card p-4 lg:w-1/2">See your messages</div>
 		</a>
