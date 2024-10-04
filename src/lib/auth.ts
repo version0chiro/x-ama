@@ -18,7 +18,7 @@ export async function handleSignInWithGoogle(supabase: SupabaseClient) {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: (isBrowser() && window.location.origin) || undefined,
+            redirectTo: "https://scintillating-pudding-06a138.netlify.app/",
         },
     });
     if (error) {
