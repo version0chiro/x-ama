@@ -18,22 +18,21 @@
 	}
 </script>
 
-<div class="flex flex-col w-full  gap-4 justify-center items-center p-2">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-2">
 	{#each messages as message, index}
-		<div class="flex flex-col card p-4 sm:w-full lg:w-1/3 md:w-1/3 gap-2">
-			{#if $expandedStates[index]}
-				<p>{message.messages}</p>
-				<button class="btn variant-filled sm:.card md:w-1/2 lg:w-1/2 " on:click={() => toggleExpand(index)}>
-					{$expandedStates[index] ? 'Show Less' : 'Expand More'}
-				</button>
-			{:else}
-				<p>{message.messages.slice(0, 100)}...</p>
-				<button class="btn variant-filled w-1/2" on:click={() => toggleExpand(index)}>
-					{$expandedStates[index] ? 'Show Less' : 'Expand More'}
-				</button>
-			{/if}
+		<div class="card p-4 flex flex-col gap-2">
+			<div class="flex-grow">
+				{#if $expandedStates[index]}
+					<p>{message.messages}</p>
+				{:else}
+					<p>{message.messages.slice(0, 100)}...</p>
+				{/if}
+			</div>
+			<button class="btn btn-sm variant-filled self-start" on:click={() => toggleExpand(index)}>
+				{$expandedStates[index] ? 'Show Less' : 'Expand More'}
+			</button>
 			{#each message.Answers as answer}
-				<p>{answer.answer}</p>
+				<p class="mt-2">{answer.answer}</p>
 			{/each}
 		</div>
 	{/each}
